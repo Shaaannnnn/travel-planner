@@ -127,10 +127,12 @@ MVP 階段建議的核心資料實體如下：
 | JoinedAt | datetime2 | 是 | 加入時間 |
 | InvitedByUserId | uniqueidentifier | 否 | 邀請人 |
 | IsActive | bit | 是 | 是否仍為此旅程成員 |
+| CanManageSharedActivities | bit | 是 | 是否可設定共同行程，預設為 false |
 
 ### 備註
 - `TripId + UserId` 應避免重複
 - 角色權限建議由這張表決定
+- 除了 Role 之外，也可透過額外權限欄位控制成員是否能管理共同行程
 
 ---
 
@@ -234,6 +236,7 @@ MVP 階段建議的核心資料實體如下：
 ### 備註
 - 共同行程與個人行程應可共存在同一天
 - MVP 階段可先不做太複雜的審核流程
+- 建立者可為團主，或已獲授權可管理共同行程的成員
 
 ---
 
@@ -402,7 +405,7 @@ MVP 階段建議的核心資料實體如下：
 - 共同行程是否一定要指定參與成員
 - 行程複製時，目標日期是否一定與來源日期相同
 - 住宿資訊是否只允許團主管理，或也可授權一般成員管理
-- 第一版是否要保留 `ItineraryCopyLog`
+- 是否只用 TripMember.CanManageSharedActivities 控制共同行程權限，或未來擴充更多細部權限
 
 ---
 
